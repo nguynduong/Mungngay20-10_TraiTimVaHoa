@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Chúc Mừng Ngày 20/10 • Trái Tim & Hoa Hồng 🌹</title>
+  <meta name="description"
+    content="Trang web chúc mừng ngày Phụ Nữ Việt Nam 20/10 với mưa trái tim lung linh và trái tim pha lê kỳ diệu.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+
+<body>
+
+  <!-- Ambient Canvas for Background Sparkles & Floating Orbs -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Background Music Toggle -->
+  <button id="music-toggle" class="music-btn" aria-label="Bật/Tắt âm nhạc" title="Bật/Tắt âm nhạc">
+    <i class="fa-solid fa-music"></i>
+    <span class="music-wave">
+      <span></span><span></span><span></span><span></span>
+    </span>
+  </button>
+
+  <!-- YouTube Player Container (ẩn nhưng giữ kích thước để autoplay ổn định) -->
+  <div id="yt-player-container"
+    style="position: fixed; bottom: 0; right: 0; width: 200px; height: 200px; opacity: 0.001; pointer-events: none; z-index: -999;">
+    <div id="yt-player"></div>
+  </div>
+
+  <main id="app-container">
+
+    <!-- ========================================================================= -->
+    <!-- 🔒 MÀN HÌNH 1: NHẬP MẬT MÃ BÍ MẬT 6 SỐ                                    -->
+    <!-- ========================================================================= -->
+    <section id="scene-passcode" class="scene active">
+      <div class="passcode-card glass-panel">
+        <div class="lock-icon-wrapper">
+          <div class="lock-glow"></div>
+          <i class="fa-solid fa-heart lock-icon"></i>
+        </div>
+        <h1 class="passcode-title">20 • 10 • SPECIAL</h1>
+        <p class="passcode-subtitle">Vui lòng nhập mật mã (6 chữ số) để mở món quà đặc biệt</p>
+
+        <!-- 6 PIN Input Display Boxes -->
+        <div class="pin-display-wrapper" id="pin-boxes" tabindex="0" role="button" aria-label="Nhập 6 số mật mã">
+          <div class="pin-box active" data-index="0"></div>
+          <div class="pin-box" data-index="1"></div>
+          <div class="pin-box" data-index="2"></div>
+          <div class="pin-box" data-index="3"></div>
+          <div class="pin-box" data-index="4"></div>
+          <div class="pin-box" data-index="5"></div>
+        </div>
+
+        <!-- Hidden Native Input for Mobile / Physical Keyboard Input -->
+        <input type="tel" id="hidden-pin-input" maxlength="6" autocomplete="off" inputmode="numeric" pattern="[0-9]*"
+          aria-hidden="true">
+
+        <!-- Error Feedback Message -->
+        <p id="passcode-error" class="passcode-error"></p>
+
+        <!-- On-Screen Numeric Keypad -->
+        <div class="keypad-grid" id="numeric-keypad">
+          <button type="button" class="key-btn" data-key="1">1</button>
+          <button type="button" class="key-btn" data-key="2">2</button>
+          <button type="button" class="key-btn" data-key="3">3</button>
+          <button type="button" class="key-btn" data-key="4">4</button>
+          <button type="button" class="key-btn" data-key="5">5</button>
+          <button type="button" class="key-btn" data-key="6">6</button>
+          <button type="button" class="key-btn" data-key="7">7</button>
+          <button type="button" class="key-btn" data-key="8">8</button>
+          <button type="button" class="key-btn" data-key="9">9</button>
+          <button type="button" class="key-btn key-action" data-action="clear" title="Xóa hết">C</button>
+          <button type="button" class="key-btn" data-key="0">0</button>
+          <button type="button" class="key-btn key-action" data-action="backspace" title="Xóa một số">
+            <i class="fa-solid fa-delete-left"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================= -->
+    <!-- 🌹 MÀN HÌNH 2: HOA HỒNG NỞ RỘ & LỜI CHÚC 20/10                             -->
+    <!-- ========================================================================= -->
+    <section id="scene-roses" class="scene">
+      <!-- Cánh hoa hồng rơi lơ lửng -->
+      <div id="rose-petals-container" class="rose-petals-overlay"></div>
+
+      <div class="rose-content-wrapper">
+        <!-- Đóa hoa hồng nở rộ nghệ thuật (SVG + CSS Bloom Animation) -->
+        <div class="blooming-rose-stage">
+          <div class="rose-aura"></div>
+          <div class="animated-rose">
+            <svg viewBox="0 0 200 200" class="rose-svg" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="roseGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff4d6d" />
+                  <stop offset="60%" stop-color="#c9184a" />
+                  <stop offset="100%" stop-color="#590d22" />
+                </linearGradient>
+                <linearGradient id="roseGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#ff758f" />
+                  <stop offset="70%" stop-color="#d90429" />
+                  <stop offset="100%" stop-color="#800f2f" />
+                </linearGradient>
+                <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#52b788" />
+                  <stop offset="100%" stop-color="#1b4332" />
+                </linearGradient>
+                <filter id="roseGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              <!-- Lá và cành đài hoa -->
+              <g class="rose-stem-leaves">
+                <path class="rose-leaf leaf-left" d="M60 145 C40 135 25 155 45 168 C65 170 70 155 60 145 Z"
+                  fill="url(#leafGrad)" />
+                <path class="rose-leaf leaf-right" d="M140 145 C160 135 175 155 155 168 C135 170 130 155 140 145 Z"
+                  fill="url(#leafGrad)" />
+                <path class="rose-sepal"
+                  d="M75 140 C85 155 100 160 100 160 C100 160 115 155 125 140 C110 145 90 145 75 140 Z"
+                  fill="#2d6a4f" />
+              </g>
+
+              <!-- Từng lớp cánh hoa hồng bung nở tinh tế -->
+              <g class="rose-petals-group" filter="url(#roseGlow)">
+                <!-- Lớp cánh ngoài cùng -->
+                <path class="petal petal-outer-1"
+                  d="M100 45 C65 45 40 85 60 125 C80 145 120 145 140 125 C160 85 135 45 100 45 Z"
+                  fill="url(#roseGrad1)" />
+                <path class="petal petal-outer-2" d="M60 80 C40 100 50 130 85 130 C120 130 130 100 110 80 Z"
+                  fill="url(#roseGrad2)" />
+                <path class="petal petal-outer-3" d="M140 80 C160 100 150 130 115 130 C80 130 70 100 90 80 Z"
+                  fill="url(#roseGrad1)" />
+
+                <!-- Lớp cánh giữa -->
+                <path class="petal petal-mid-1"
+                  d="M75 65 C60 85 70 115 100 115 C130 115 140 85 125 65 C100 50 85 55 75 65 Z"
+                  fill="url(#roseGrad2)" />
+                <path class="petal petal-mid-2"
+                  d="M125 70 C140 90 125 110 100 110 C75 110 60 90 75 70 C90 55 110 55 125 70 Z"
+                  fill="url(#roseGrad1)" />
+
+                <!-- Lớp cánh nhụy bên trong -->
+                <path class="petal petal-inner-1"
+                  d="M85 80 C75 95 85 105 100 105 C115 105 125 95 115 80 C105 70 95 70 85 80 Z"
+                  fill="url(#roseGrad2)" />
+                <path class="petal petal-inner-core"
+                  d="M93 85 C88 92 92 98 100 98 C108 98 112 92 107 85 C103 80 97 80 93 85 Z" fill="#ff758f" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Khung Lời Chúc 20/10 -->
+        <div class="rose-greeting-card glass-panel">
+          <div class="greeting-badge" id="greeting-badge">Happy Vietnamese Women's Day • 20/10</div>
+          <h2 class="greeting-title" id="rose-greeting-title">Chúc Mừng Ngày 20/10 🌹</h2>
+
+          <div class="greeting-divider">
+            <span class="divider-line"></span>
+            <i class="fa-solid fa-heart divider-heart"></i>
+            <span class="divider-line"></span>
+          </div>
+
+          <p class="greeting-content" id="rose-greeting-content">
+            <!-- Nội dung lời chúc từ config.js -->
+          </p>
+
+          <!-- Nút mở quà đặc biệt -->
+          <div class="gift-prompt-box">
+            <p class="gift-prompt-text">
+              <span id="prompt-prefix">Có 1 món quà đặc biệt dành tặng cho</span>
+              <span id="recipient-name" class="highlight-name">...</span>
+            </p>
+            <button id="btn-next-to-rain" class="glow-btn" type="button">
+              <span>Mở quà ngay</span>
+              <i class="fa-solid fa-gift"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================= -->
+    <!-- 💖 MÀN HÌNH 3: CƠN MƯA TRÁI TIM & HOA HỒNG LUNG LINH                       -->
+    <!-- Chạm/bấm vào trái tim đang rơi để kích hoạt hiệu ứng pháo hoa sao lấp lánh  -->
+    <!-- ========================================================================= -->
+    <section id="scene-rain" class="scene">
+      <!-- Container chứa các trái tim và đóa hoa rơi tự do liên tục -->
+      <div id="rain-stage" class="rain-stage"></div>
+
+      <!-- Hint hướng dẫn người xem -->
+      <div class="rain-hint-banner">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Chạm hoặc bấm vào các trái tim đang rơi để nhận những điều kỳ
+        diệu nhé!
+      </div>
+
+      <!-- Hộp câu hỏi: Có 1 món quà bí mật có muốn nhận không? -->
+      <div class="secret-question-box glass-panel">
+        <div class="secret-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+        <h3 id="secret-question-text" class="secret-title">Có 1 món quà bí mật có muốn nhận không? 🎁</h3>
+
+        <div class="question-actions">
+          <button id="btn-gift-no" class="action-btn btn-no" type="button">
+            <i class="fa-regular fa-face-smile"></i>
+            <span id="btn-no-text">Không 🙈</span>
+          </button>
+
+          <button id="btn-gift-yes" class="action-btn btn-yes glow-btn" type="button">
+            <i class="fa-solid fa-heart-circle-check"></i>
+            <span id="btn-yes-text">Có! Nhận ngay ✨</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================= -->
+    <!-- 💖 MÀN HÌNH 4: TRÁI TIM PHA LÊ KHỔNG LỒ & LỜI NHẮN CUỐI CÙNG               -->
+    <!-- Các viên ngọc trái tim phát sáng đập nhịp ghép thành hình trái tim hoàn mỹ   -->
+    <!-- ========================================================================= -->
+    <section id="scene-heart" class="scene">
+      <div class="heart-scene-container">
+
+        <div class="heart-header">
+          <span class="heart-sub">Dành tặng cho bạn</span>
+          <h2 class="heart-title">Trái Tim Nguyện Ước 💖</h2>
+          <p class="heart-tip"><i class="fa-solid fa-sparkles"></i> Chạm vào mỗi viên ngọc trái tim để mở một lời chúc
+            bí mật</p>
+        </div>
+
+        <!-- Khung xếp các trái tim pha lê thành hình trái tim hoàn hảo -->
+        <div class="heart-stage-wrapper">
+          <div id="heart-gems-container" class="heart-gems-container">
+            <!-- Các viên ngọc trái tim pha lê được định vị bằng JavaScript -->
+          </div>
+
+          <!-- Trái tim trung tâm phát sáng nhịp đập tình yêu -->
+          <div class="heart-center-glow">
+            <i class="fa-solid fa-heart center-pulsing-heart"></i>
+            <span class="center-text">20 • 10</span>
+          </div>
+        </div>
+
+        <!-- Khung vài dòng chữ nhắn nhủ bên dưới hình trái tim -->
+        <div class="final-letter-card glass-panel">
+          <div class="letter-stamp">
+            <i class="fa-solid fa-ribbon"></i>
+          </div>
+
+          <div class="letter-body" id="final-letter-lines">
+            <!-- Các dòng chữ được load từ CONFIG.finalLetter -->
+          </div>
+
+          <div class="letter-signature">
+            <p>From: With all my love & respect 🌹</p>
+            <p class="letter-date">20 Tháng 10</p>
+          </div>
+
+          <!-- Nút xem lại nếu muốn -->
+          <div class="letter-footer-actions">
+            <button id="btn-restart" class="ghost-btn" type="button">
+              <i class="fa-solid fa-rotate-left"></i> Xem lại từ đầu
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ========================================================================= -->
+  <!-- 💌 POPUP HỘP ĐIỀU ƯỚC KHI CHẠM VÀO MỘT VIÊN NGỌC TRÁI TIM                   -->
+  <!-- ========================================================================= -->
+  <div id="wish-modal" class="wish-modal" role="dialog" aria-modal="true" aria-label="Điều ước bí mật">
+    <div class="wish-modal-backdrop"></div>
+    <div class="wish-modal-card glass-panel">
+      <button id="wish-close-btn" class="wish-close" type="button" aria-label="Đóng">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="wish-icon-box">
+        <i class="fa-solid fa-heart-pulse wish-heart-icon"></i>
+      </div>
+      <h4 class="wish-subtitle">Thông Điệp Nguyện Ước 20/10 ✨</h4>
+      <p id="wish-message-text" class="wish-message"></p>
+      <button id="wish-ok-btn" class="glow-btn wish-btn" type="button">
+        <span>Nhận lấy điều ước 🌸</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="config.js?v=1"></script>
+  <script src="script.js?v=1"></script>
+</body>
+
+</html>
